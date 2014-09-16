@@ -18,6 +18,7 @@ newuser = "hacker1234"
 ##FUNCTIONS
 def findUser():
 	os.system('clear')
+	user = raw_input("What username should be used to connect? : ")
 	p = subprocess.Popen(["./usr/bin/ipmitool","-I","lanplus","-C","0","-H",ip,"-U",user,"-P","calvin","user","list"], stdout=subprocess.PIPE)
 	result, err = p.communicate()
 	print result
