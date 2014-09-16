@@ -56,7 +56,6 @@ try:
 		print ("3. Change default admin username")
 		print ("4. EXIT")
 		print (30 * '-') 
-		print ("Current user set to: " + user)
 		print (30 * '-')
 		choice = raw_input('Enter your choice [1-4] : ')
 		try:
