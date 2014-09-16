@@ -47,6 +47,7 @@ def changePass(username, newuser, password):
 #MAIN
 try:
 	os.system('clear')
+	user = raw_input("Please enter the built in IPMI account's username to use: ")
 	while True:
 		print (30 * '-')
 		print (" IMPI-CIPHERIN")
@@ -62,7 +63,6 @@ try:
 			choice = int(choice)
 		except ValueError:
 			print "\n[*] ERROR:  Please provide a numeric choice.\n"
-		user = raw_input("Please enter the built in username to use when connecting: ")
 		if choice == 1:
 			findUser(user)
 		elif choice == 2:
