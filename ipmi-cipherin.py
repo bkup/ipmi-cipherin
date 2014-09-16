@@ -12,14 +12,10 @@ else:
 	#get IP
 	ip = sys.argv[1]
 
-user = "root"
-newuser = "hacker1234"
-
 ##FUNCTIONS
-def findUser():
-	user = raw_input("\nWhat username should be used to connect? : ")
+def findUser(username):
 	os.system('clear')
-	p = subprocess.Popen(["./usr/bin/ipmitool","-I","lanplus","-C","0","-H",ip,"-U",user,"-P","calvin","user","list"], stdout=subprocess.PIPE)
+	p = subprocess.Popen(["./usr/bin/ipmitool","-I","lanplus","-C","0","-H",ip,"-U",username,"-P","calvin","user","list"], stdout=subprocess.PIPE)
 	result, err = p.communicate()
 	print result
 	print "\n"
@@ -31,18 +27,18 @@ def changeUser(tmpuser):
 	user = tmpuser
 	return
 
-def changePass(newuser,password):
+def changePass(username, newuser, password):
 	os.system('clear')
-	p = subprocess.Popen(["./usr/bin/ipmitool","-I","lanplus","-C","0","-H",ip,"-U",user,"-P","calvin","user","set","name","2",newuser], stdout=subprocess.PIPE)
+	p = subprocess.Popen(["./usr/bin/ipmitool","-I","lanplus","-C","0","-H",ip,"-U",username,"-P","calvin","user","set","name","2",newuser], stdout=subprocess.PIPE)
 	result, err = p.communicate()
 	print result
-	p = subprocess.Popen(["./usr/bin/ipmitool","-I","lanplus","-C","0","-H",ip,"-U",user,"-P","calvin","user","set","password","2",password], stdout=subprocess.PIPE)
+	p = subprocess.Popen(["./usr/bin/ipmitool","-I","lanplus","-C","0","-H",ip,"-U",username,"-P","calvin","user","set","password","2",password], stdout=subprocess.PIPE)
 	result, err = p.communicate()
 	print result
-	p = subprocess.Popen(["./usr/bin/ipmitool","-I","lanplus","-C","0","-H",ip,"-U",user,"-P","calvin","user","priv","2","4"], stdout=subprocess.PIPE)
+	p = subprocess.Popen(["./usr/bin/ipmitool","-I","lanplus","-C","0","-H",ip,"-U",username,"-P","calvin","user","priv","2","4"], stdout=subprocess.PIPE)
 	result, err = p.communicate()
 	print result
-	p = subprocess.Popen(["./usr/bin/ipmitool","-I","lanplus","-C","0","-H",ip,"-U",user,"-P","calvin","user","enable","2"], stdout=subprocess.PIPE)
+	p = subprocess.Popen(["./usr/bin/ipmitool","-I","lanplus","-C","0","-H",ip,"-U",username,"-P","calvin","user","enable","2"], stdout=subprocess.PIPE)
 	result, err = p.communicate()
 	print result
 	return
@@ -67,12 +63,13 @@ try:
 			choice = int(choice)
 		except ValueError:
 			print "\n[*] ERROR:  Please provide a numeric choice.\n"
+		user = raw_input("Please enter the username to use when connecting: ")
 		if choice == 1:
-			findUser()
+			findUser(user)
 		elif choice == 2:
 			newuser = raw_input('New username: ')
 			password = raw_input('New password: ')
-			changePass(newuser,password)
+			changePass(user, newuser, password)
 		elif choice == 3:
 			tmpuser = raw_input('Default username: ')
 			changeUser(tmpuser)
