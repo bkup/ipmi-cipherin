@@ -62,7 +62,7 @@ try:
 			choice = int(choice)
 		except ValueError:
 			print "\n[*] ERROR:  Please provide a numeric choice.\n"
-		user = raw_input("Please enter the username to use when connecting: ")
+		user = raw_input("Please enter the built in username to use when connecting: ")
 		if choice == 1:
 			findUser(user)
 		elif choice == 2:
